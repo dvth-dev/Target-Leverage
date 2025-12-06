@@ -14,14 +14,14 @@ const Calculator = () => {
     const [tabData, setTabData] = useState<{ price: TabData; percent: TabData }>(() => {
         const saved = localStorage.getItem('tabData');
         return saved ? JSON.parse(saved) : {
-            price: { balance: '20', risk: '1' },
-            percent: { balance: '20', risk: '1' }
+            price: { balance: '', risk: '' },
+            percent: { balance: '', risk: '' }
         };
     });
 
-    const [entryPrice, setEntryPrice] = useState<string>(() => localStorage.getItem('entryPrice') || '2');
-    const [stopLossPrice, setStopLossPrice] = useState<string>(() => localStorage.getItem('stopLossPrice') || '1');
-    const [slPercent, setSlPercent] = useState<string>(() => localStorage.getItem('slPercent') || '1');
+    const [entryPrice, setEntryPrice] = useState<string>(() => localStorage.getItem('entryPrice') || '');
+    const [stopLossPrice, setStopLossPrice] = useState<string>(() => localStorage.getItem('stopLossPrice') || '');
+    const [slPercent, setSlPercent] = useState<string>(() => localStorage.getItem('slPercent') || '');
 
     const [result, setResult] = useState<{
         leverage: number;
@@ -146,7 +146,8 @@ const Calculator = () => {
                                         type="number"
                                         value={currentBalance}
                                         onChange={(e) => updateTabData('balance', e.target.value)}
-                                        className="w-full bg-transparent text-[#eef2f6] p-3 focus:outline-none font-mono text-xl"
+                                        className="w-full bg-transparent text-[#eef2f6] p-3 focus:outline-none font-mono text-xl placeholder-[#232d4b]"
+                                        placeholder="0.00"
                                     />
                                 </div>
                             </div>
@@ -162,7 +163,8 @@ const Calculator = () => {
                                         type="number"
                                         value={currentRisk}
                                         onChange={(e) => updateTabData('risk', e.target.value)}
-                                        className="w-full bg-transparent text-[#eef2f6] p-3 focus:outline-none font-mono text-xl"
+                                        className="w-full bg-transparent text-[#eef2f6] p-3 focus:outline-none font-mono text-xl placeholder-[#232d4b]"
+                                        placeholder="0.00"
                                     />
                                 </div>
                             </div>
@@ -183,7 +185,8 @@ const Calculator = () => {
                                             type="number"
                                             value={entryPrice}
                                             onChange={(e) => setEntryPrice(e.target.value)}
-                                            className="w-full bg-transparent text-[#eef2f6] p-3 focus:outline-none font-mono text-xl"
+                                            className="w-full bg-transparent text-[#eef2f6] p-3 focus:outline-none font-mono text-xl placeholder-[#232d4b]"
+                                            placeholder="0.00"
                                         />
                                     </div>
                                 </div>
@@ -198,7 +201,8 @@ const Calculator = () => {
                                             type="number"
                                             value={stopLossPrice}
                                             onChange={(e) => setStopLossPrice(e.target.value)}
-                                            className="w-full bg-transparent text-[#eef2f6] p-3 focus:outline-none font-mono text-xl"
+                                            className="w-full bg-transparent text-[#eef2f6] p-3 focus:outline-none font-mono text-xl placeholder-[#232d4b]"
+                                            placeholder="0.00"
                                         />
                                     </div>
                                 </div>
@@ -216,7 +220,8 @@ const Calculator = () => {
                                             type="number"
                                             value={slPercent}
                                             onChange={(e) => setSlPercent(e.target.value)}
-                                            className="w-full bg-transparent text-[#eef2f6] p-3 focus:outline-none font-mono text-xl"
+                                            className="w-full bg-transparent text-[#eef2f6] p-3 focus:outline-none font-mono text-xl placeholder-[#232d4b]"
+                                            placeholder="1.0"
                                         />
                                     </div>
                                 </div>
