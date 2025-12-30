@@ -99,6 +99,16 @@ const Calculator = () => {
         calculate();
     }, [currentBalance, currentRisk, entryPrice, stopLossPrice, slPercent, activeTab]);
 
+
+    const handleInputChange = (setter: (val: string) => void) => (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        const cleanValue = value.replace(/[^0-9.,]/g, '');
+        const normalizedValue = cleanValue.replace(/,/g, '.');
+        const distinctParts = normalizedValue.split('.');
+        const finalValue = distinctParts.shift() + (distinctParts.length ? '.' + distinctParts.join('') : '');
+        setter(finalValue);
+    };
+
     return (
         <div className="w-full max-w-5xl mx-auto">
             <div className="grid lg:grid-cols-12 gap-8">
@@ -143,9 +153,10 @@ const Calculator = () => {
                                 <div className="tech-input-container flex items-center">
                                     <span className="pl-4 text-[#232d4b] font-bold">$</span>
                                     <input
-                                        type="number"
+                                        type="text"
+                                        inputMode="decimal"
                                         value={currentBalance}
-                                        onChange={(e) => updateTabData('balance', e.target.value)}
+                                        onChange={handleInputChange((val) => updateTabData('balance', val))}
                                         className="w-full bg-transparent text-[#eef2f6] p-3 focus:outline-none font-mono text-xl placeholder-[#232d4b]"
                                         placeholder="0.00"
                                     />
@@ -160,9 +171,10 @@ const Calculator = () => {
                                 <div className="tech-input-container flex items-center">
                                     <span className="pl-4 text-[#232d4b] font-bold">R</span>
                                     <input
-                                        type="number"
+                                        type="text"
+                                        inputMode="decimal"
                                         value={currentRisk}
-                                        onChange={(e) => updateTabData('risk', e.target.value)}
+                                        onChange={handleInputChange((val) => updateTabData('risk', val))}
                                         className="w-full bg-transparent text-[#eef2f6] p-3 focus:outline-none font-mono text-xl placeholder-[#232d4b]"
                                         placeholder="0.00"
                                     />
@@ -182,9 +194,10 @@ const Calculator = () => {
                                     </label>
                                     <div className="tech-input-container">
                                         <input
-                                            type="number"
+                                            type="text"
+                                            inputMode="decimal"
                                             value={entryPrice}
-                                            onChange={(e) => setEntryPrice(e.target.value)}
+                                            onChange={handleInputChange(setEntryPrice)}
                                             className="w-full bg-transparent text-[#eef2f6] p-3 focus:outline-none font-mono text-xl placeholder-[#232d4b]"
                                             placeholder="0.00"
                                         />
@@ -198,9 +211,10 @@ const Calculator = () => {
                                     </label>
                                     <div className="tech-input-container">
                                         <input
-                                            type="number"
+                                            type="text"
+                                            inputMode="decimal"
                                             value={stopLossPrice}
-                                            onChange={(e) => setStopLossPrice(e.target.value)}
+                                            onChange={handleInputChange(setStopLossPrice)}
                                             className="w-full bg-transparent text-[#eef2f6] p-3 focus:outline-none font-mono text-xl placeholder-[#232d4b]"
                                             placeholder="0.00"
                                         />
@@ -217,9 +231,10 @@ const Calculator = () => {
                                     <div className="tech-input-container flex items-center">
                                         <span className="pl-4 text-[#232d4b] font-bold">%</span>
                                         <input
-                                            type="number"
+                                            type="text"
+                                            inputMode="decimal"
                                             value={slPercent}
-                                            onChange={(e) => setSlPercent(e.target.value)}
+                                            onChange={handleInputChange(setSlPercent)}
                                             className="w-full bg-transparent text-[#eef2f6] p-3 focus:outline-none font-mono text-xl placeholder-[#232d4b]"
                                             placeholder="1.0"
                                         />
@@ -228,6 +243,7 @@ const Calculator = () => {
                             </div>
                         )}
                     </div>
+
 
                 </div>
 
